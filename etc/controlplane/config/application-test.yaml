@@ -1,0 +1,22 @@
+grpc:
+  server:
+    port: ${CONTROLPLANE_XDS_PORT}
+
+server:
+  port: ${CONTROLPLANE_CACHE_PORT}
+
+envoy:
+  admin:
+    url: ${ENVOY_ADMIN_URL}
+  listener:
+    port: ${ENVOY_LISTENER_PORT}
+
+cluster:
+  registry:
+    cleanup-cron : "@daily"
+  selector:
+    refresh-cron: 0/20 * * * * *
+    filter-out:
+      - cache
+      - xds_cluster
+
