@@ -43,7 +43,7 @@ static_resources:
             address:
               socket_address:
                 address: controlplane
-                port_value: ${CONTROLPLANE_CACHE_PORT}
+                port_value: ${CONTROLPLANE_HTTP_PORT}
 
 admin:
   address:

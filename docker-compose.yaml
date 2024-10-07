@@ -13,9 +13,13 @@ services:
       - default
 
   trino_1:
-    image: prabodhtr/trino:trino-server-v449-amd64
+    image: prabodhtr/trino:trino-server-v461-amd64
     environment:
       HTTP_PORT: 8080
+      CLUSTER_HOST: trino_1
+      NODE_ID: trino_1
+    env_file:
+      - .env
     ports:
       - "8080:8080"
       - "7095:7095"
@@ -28,9 +32,13 @@ services:
       - db_network
       
   trino_2:
-    image: prabodhtr/trino:trino-server-v449-amd64
+    image: prabodhtr/trino:trino-server-v461-amd64
     environment:
       HTTP_PORT: 8090
+      CLUSTER_HOST: trino_2
+      NODE_ID: trino_2
+    env_file:
+      - .env
     ports:
       - "8090:8090"
     volumes:

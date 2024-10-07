@@ -3,7 +3,7 @@ grpc:
     port: ${CONTROLPLANE_XDS_PORT}
 
 server:
-  port: ${CONTROLPLANE_CACHE_PORT}
+  port: ${CONTROLPLANE_HTTP_PORT}
 
 envoy:
   admin:
