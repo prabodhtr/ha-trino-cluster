@@ -1,0 +1,23 @@
+services:
+  clusterA-coord:
+    extends:
+      service: trino
+      file: service-base.yaml
+    environment:
+      CLUSTER_HOST: clusterA-coord
+      NODE_ID: clusterA-coord
+      DISCOVERY_URI: http://clusterA-coord:${HTTP_PORT}
+    volumes:
+      - ./etc/trino/default-coordinator-configs:/etc/trino
+
+  clusterA-worker-1:
+    extends:
+      service: trino
+      file: service-base.yaml
+    environment:
+      NODE_ID: clusterA-worker-1
+      DISCOVERY_URI: http://clusterA-coord:${HTTP_PORT}
+    volumes:
+      - ./etc/trino/default-worker-configs:/etc/trino
+    depends_on:
+      - clusterA-coord

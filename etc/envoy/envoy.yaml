@@ -30,7 +30,7 @@ static_resources:
         - endpoint:
             address:
               socket_address:
-                address: controlplane
+                address: ${CONTROLPLANE_HOST}
                 port_value: ${CONTROLPLANE_XDS_PORT}
 
   - name: cache
@@ -42,7 +42,7 @@ static_resources:
         - endpoint:
             address:
               socket_address:
-                address: controlplane
+                address: ${CONTROLPLANE_HOST}
                 port_value: ${CONTROLPLANE_HTTP_PORT}
 
 admin:

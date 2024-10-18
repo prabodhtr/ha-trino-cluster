@@ -1,0 +1,32 @@
+services:
+  envoy:
+    image: custom_envoyproxy:latest
+    env_file: .env
+    volumes:
+      - ./etc/envoy:/etc/envoy
+      - ./logs/envoy:/var/log
+    networks:
+      - default
+
+  controlplane:
+    image: prabodhtr/trino:trino-controlplane-1.0
+    env_file:
+      - .env
+    volumes:
+      - ./etc/controlplane:/etc/controlplane
+    networks:
+      - default
+
+  trino:
+    image: prabodhtr/trino:trino-server-v461-amd64
+    env_file:
+      - .env
+    volumes:
+      - ./etc/trino/catalog:/etc/trino/catalog
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "${DISCOVERY_URI}/v1/info" ]
+      interval: 30s
+      timeout: 60s
+      retries: 5
+    networks:
+      - default

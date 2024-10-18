@@ -1,0 +1,26 @@
+include:
+  - clusterA-compose.yaml
+  - clusterB-compose.yaml
+  - db-compose.yaml
+
+services:
+  controlplane:
+    extends:
+      service: controlplane
+      file: service-base.yaml
+    environment:
+      ACTIVE_PROFILE: test
+    ports:
+      - "9090:9090"
+      
+  envoy:
+    extends:
+      service: envoy
+      file: service-base.yaml
+    environment:
+      ENVOY_UID: 777
+    ports:
+      - "8090:8090"
+      - "8091:8091"
+
+ 
